@@ -7,7 +7,7 @@ use Framework\Router\RouterTwigExtension;
 use Framework\Session\PHPSession;
 use Framework\Session\SessionInterface;
 use Framework\Twig\{
-    FlashExtension, PagerFantaExtension, TextExtension, TimeExtension
+    FlashExtension, FormExtension, PagerFantaExtension, TextExtension, TimeExtension
 };
 
 return [
@@ -21,7 +21,8 @@ return [
       \DI\get(PagerFantaExtension::class),
       \DI\get(TextExtension::class),
       \DI\get(TimeExtension::class),
-      \DI\get(FlashExtension::class)
+      \DI\get(FlashExtension::class),
+      \DI\get(FormExtension::class)
     ],
     SessionInterface::class => \DI\object(PHPSession::class),
     Router::class => \DI\object(),

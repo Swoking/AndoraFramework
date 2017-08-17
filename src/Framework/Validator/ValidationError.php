@@ -1,7 +1,8 @@
 <?php
 namespace Framework\Validator;
 
-class ValidationError {
+class ValidationError
+{
 
     private $key;
     private $rule;
@@ -32,5 +33,4 @@ class ValidationError {
         $params = array_merge([$this->messages[$this->rule], $this->key], $this->attributes);
         return (string)call_user_func_array('sprintf', $params);
     }
-
 }
