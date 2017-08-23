@@ -3,7 +3,8 @@ namespace Framework\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-class TrailingSlashMiddleware {
+class TrailingSlashMiddleware
+{
 
     public function __invoke(ServerRequestInterface $request, callable $next)
     {
@@ -15,5 +16,4 @@ class TrailingSlashMiddleware {
         }
         return $next($request);
     }
-
 }

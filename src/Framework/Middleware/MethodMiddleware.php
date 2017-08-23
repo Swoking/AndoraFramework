@@ -5,7 +5,8 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class MethodMiddleware implements MiddlewareInterface {
+class MethodMiddleware implements MiddlewareInterface
+{
 
     public function process(ServerRequestInterface $request, DelegateInterface $next)
     {
@@ -17,5 +18,4 @@ class MethodMiddleware implements MiddlewareInterface {
         }
         return $next->process($request);
     }
-
 }

@@ -4,7 +4,8 @@ namespace Framework\Middleware;
 use Framework\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
-class RouterMiddleware {
+class RouterMiddleware
+{
 
     /**
      * @var Router
@@ -29,5 +30,4 @@ class RouterMiddleware {
         $request = $request->withAttribute(get_class($route), $route);
         return $next($request);
     }
-
 }

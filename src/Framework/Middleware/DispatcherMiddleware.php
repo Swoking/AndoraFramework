@@ -7,7 +7,8 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class DispatcherMiddleware {
+class DispatcherMiddleware
+{
 
     /**
      * @var ContainerInterface
@@ -38,5 +39,4 @@ class DispatcherMiddleware {
             throw new \Exception('The response is not a string or an instance of ResponseInterface');
         }
     }
-
 }
