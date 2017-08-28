@@ -11,14 +11,16 @@ use Framework\Middleware\NotFoundMiddleware;
 use GuzzleHttp\Psr7\ServerRequest;
 use Middlewares\Whoops;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+chdir(dirname(__DIR__));
+
+require 'vendor/autoload.php';
 
 $modules = [
     AdminModule::class,
     BlogModule::class
 ];
 
-$app = (new \Framework\App(dirname(__DIR__) . '/config/config.php'))
+$app = (new \Framework\App('config/config.php'))
     ->addModule(AdminModule::class)
     ->addModule(BlogModule::class)
     ->pipe(Whoops::class)
