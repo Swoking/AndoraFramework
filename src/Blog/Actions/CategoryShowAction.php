@@ -4,6 +4,7 @@ namespace App\Blog\Actions;
 use App\Blog\Table\CategoryTable;
 use App\Blog\Table\PostTable;
 use Framework\Actions\RouterAwareAction;
+use Framework\Auth\User;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
 use GuzzleHttp\Psr7\Response;
@@ -33,7 +34,8 @@ class CategoryShowAction
     public function __construct(
         RendererInterface $renderer,
         PostTable $postTable,
-        CategoryTable $categoryTable
+        CategoryTable $categoryTable,
+        User $user
     ) {
     
         $this->renderer = $renderer;

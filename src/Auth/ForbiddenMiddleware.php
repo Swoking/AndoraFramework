@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Auth;
 
 use Framework\Auth\ForbiddenException;
@@ -33,9 +34,18 @@ class ForbiddenMiddleware implements MiddlewareInterface
         try {
             return $delegate->process($request);
         } catch (ForbiddenException $exception) {
-            $this->session->set('auth.redirect', $request->getUri()->getPath());
-            (new FlashService($this->session))->error('Vous devez posséder un compte pour accéder à cette page');
-            return new RedirectResponse($this->loginPath);
+            return $this->redirectLogin($request);
+        } catch (\TypeError $error) {
+            if (strpos($error->getMessage(), \Framework\Auth\User::class) !== false) {
+                return $this->redirectLogin($request);
+            }
         }
+    }
+
+    public function redirectLogin(ServerRequestInterface $request): ResponseInterface
+    {
+        $this->session->set('auth.redirect', $request->getUri()->getPath());
+        (new FlashService($this->session))->error('Vous devez posséder un compte pour accéder à cette page');
+        return new RedirectResponse($this->loginPath);
     }
 }
