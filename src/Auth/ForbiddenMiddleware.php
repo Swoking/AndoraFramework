@@ -29,6 +29,12 @@ class ForbiddenMiddleware implements MiddlewareInterface
         $this->session = $session;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return ResponseInterface
+     * @throws \TypeError
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         try {
@@ -39,6 +45,7 @@ class ForbiddenMiddleware implements MiddlewareInterface
             if (strpos($error->getMessage(), \Framework\Auth\User::class) !== false) {
                 return $this->redirectLogin($request);
             }
+            throw $error;
         }
     }
 
