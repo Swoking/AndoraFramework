@@ -8,16 +8,18 @@ use Framework\Router\RouterFactory;
 use Framework\Router\RouterTwigExtension;
 use Framework\Session\PHPSession;
 use Framework\Session\SessionInterface;
+use Framework\SwiftMailerFactory;
 use Framework\Twig\{
     CsrfExtension, FlashExtension, FormExtension, PagerFantaExtension, TextExtension, TimeExtension
 };
+use Psr\Container\ContainerInterface;
 
 return [
     'env' => \DI\env('ENV', 'production'),
     'database.host' => 'localhost',
     'database.username' => 'root',
-    'database.password' => 'root',
-    'database.name' => 'monsupersite',
+    'database.password' => '',
+    'database.name' => 'monframwork',
     'views.path' => dirname(__DIR__) . '/views',
     'twig.extensions' => [
       \DI\get(RouterTwigExtension::class),
@@ -32,7 +34,7 @@ return [
     CsrfMiddleware::class => \DI\object()->constructor(\DI\get(SessionInterface::class)),
     Router::class => \DI\factory(RouterFactory::class),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class),
-    \PDO::class => function (\Psr\Container\ContainerInterface $c) {
+    \PDO::class => function (ContainerInterface $c) {
         return new PDO(
             'mysql:host=' . $c->get('database.host') . ';dbname=' . $c->get('database.name'),
             $c->get('database.username'),
@@ -46,5 +48,5 @@ return [
     // MAILER
     'mail.to'    => 'admin@admin.fr',
     'mail.from'    => 'no-reply@admin.fr',
-    Swift_Mailer::class => \DI\factory(\Framework\SwiftMailerFactory::class)
+    Swift_Mailer::class => \DI\factory(SwiftMailerFactory::class)
 ];

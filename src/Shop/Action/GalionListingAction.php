@@ -5,7 +5,7 @@ use App\Shop\Table\ProductTable;
 use Framework\Renderer\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class RankListingAction
+class GalionListingAction
 {
 
     /**
@@ -27,7 +27,7 @@ class RankListingAction
     {
         $params = $request->getQueryParams();
         $page = $params['p'] ?? 1;
-        $products = $this->productTable->findRank()->paginate(12, $page);
+        $products = $this->productTable->findGalion()->paginate(12, $page);
         return $this->renderer->render('@shop/index', compact('products', 'page'));
     }
 }

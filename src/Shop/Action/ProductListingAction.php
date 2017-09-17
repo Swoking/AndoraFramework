@@ -5,7 +5,7 @@ use App\Shop\Table\ProductTable;
 use Framework\Renderer\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class RankListingAction
+class ProductListingAction
 {
 
     /**
